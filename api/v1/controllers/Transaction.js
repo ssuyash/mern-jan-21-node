@@ -1,7 +1,9 @@
 const TransactionModel = require('../models/Transaction')
 
+let TransactionController = {}
 
-let addTransaction = async (req, res) => {
+
+TransactionController.addTransaction = async (req, res) => {
     let { amount, type, remark } = req.body
     
     let newTxn = new TransactionModel({
@@ -16,7 +18,7 @@ let addTransaction = async (req, res) => {
     })
 }
 
-let getTransactions = async (req, res) => {
+TransactionController.getTransactions = async (req, res) => {
     
     let userid = req.decoded.id
 
@@ -34,7 +36,7 @@ let getTransactions = async (req, res) => {
 }
 
 
-let deleteTransaction = async (req, res) => {
+TransactionController.deleteTransaction = async (req, res) => {
     let { txnid } = req.params
     
 
@@ -47,7 +49,7 @@ let deleteTransaction = async (req, res) => {
 }
 
 
-let updateTransaction = async (req, res) => {
+TransactionController.updateTransaction = async (req, res) => {
     let { txnid } = req.params
     
     let { data } = req.body
@@ -62,4 +64,4 @@ let updateTransaction = async (req, res) => {
 }
 
 
-module.exports = {addTransaction, getTransactions, deleteTransaction, updateTransaction}
+module.exports = TransactionController;
