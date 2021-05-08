@@ -33,6 +33,9 @@ let login = async (req, res) => {
 
 let register = async (req, res) => {
     let { name, email, password } = req.body
+
+    //server side validation
+
     UserModel.findOne({ email }).then(async dbres => {
         if (dbres != null) {
             //user already exists
@@ -53,8 +56,7 @@ let register = async (req, res) => {
             })
         }
     }).catch(err => {
-        res.send({ status: "ERR", msg: "something went wrong", data: [] })
-
+       res.send({ status: "ERR", msg: "something went wrong", data: [] })
     })
 
 }
