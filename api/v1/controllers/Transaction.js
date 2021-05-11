@@ -21,12 +21,23 @@ TransactionController.addTransaction = async (req, res) => {
 TransactionController.getTransactions = async (req, res) => {
     
     let userid = req.decoded.id
+    let {limit, page} = req.query
+    console.log(limit, page)
+    limit = parseInt(limit)
+    let skipVal = (page-1)*limit
 
+    let filter = {
+        
+    }
     try {
-        let data = await TransactionModel.find({ userid })
+        let data = await TransactionModel.find(filter, {_id:0, __v:0})
+        .limit(limit)
+        .skip(skipVal)
+        .sort({createdAt:-1})
         return res.send({ status: "OK", msg: "successfully fetched", data })
 
     } catch (e) {
+        console.log(e)
         return res.send({ status: "ERR", msg: "Something went wrong", data: [] })
 
     }

@@ -15,6 +15,7 @@ require('./database/db')
 
 const txnRouter = require('./api/v1/router/Transaction')
 const userRouter = require('./api/v1/router/User')
+const productRouter = require('./api/v1/router/Product')
 
 const app = express();
 app.use(cors())
@@ -28,6 +29,7 @@ app.use("/uploads", express.static(__dirname+'/uploads'))
 
 app.use('/transaction', txnRouter)
 app.use('/user', userRouter)
+app.use('/product', productRouter)
 
 
 const s3 = new aws.S3({
@@ -67,10 +69,6 @@ app.post('/file-upload', (req, res)=>{
             fs.unlinkSync(uploadPath)
             res.send("uploaded")
         });
-    
-
-
-
 
         
     })
@@ -81,3 +79,4 @@ app.post('/file-upload', (req, res)=>{
 app.listen(3300, () => {
     console.log("server is running")
 })
+
