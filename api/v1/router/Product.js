@@ -4,6 +4,7 @@ const productController = require('../controllers/product')
 
 
 
-route.get('/',  productController.getProducts)
+route.post('/',  productController.getProducts)
+route.get('/filters',  productController.getFilters)
 
 module.exports = route;
